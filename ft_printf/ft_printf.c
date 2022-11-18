@@ -12,21 +12,21 @@
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *str_format, ...)
+int	ft_printf(const char *str, ...)
 {
 	va_list	arg;
 	int		len;
 
 	len = 0;
-	va_start(arg, str_format);
-	while (*str_format)
+	va_start(arg, str);
+	while (*str)
 	{
-		if (*str_format == '%')
-			len += ft_format(str_format + 1, arg);
+		if (*str == '%')
+			len += ft_format(str + 1, arg);
 		else
-			len += ft_putchar(*str_format);
-		if (*str_format)
-			str_format++;
+			len += ft_putchar(*str);
+		if (*str)
+			str++;
 	}
 	va_end(arg);
 	return (len);
