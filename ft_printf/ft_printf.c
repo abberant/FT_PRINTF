@@ -22,7 +22,7 @@ int	ft_printf(const char *str, ...)
 	while (*str)
 	{
 		if (*str == '%')
-			len += ft_format(str + 1, arg);
+			len += ft_layout(++str, arg);
 		else
 			len += ft_putchar(*str);
 		if (*str)
