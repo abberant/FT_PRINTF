@@ -12,16 +12,17 @@
 
 #include "ft_printf.h"
 
-void	ft_putunbr(unsigned int n)
+int	ft_putunbr(unsigned int n)
 {
-	size_t	i;
+	size_t	len;
 
-	i = 0;
+	len = 0;
 	if (n > 9)
 	{
-		i += ft_putunbr(n / 10);
-		i += ft_putchar(n % 10 + '0');
+		len += ft_putunbr(n / 10);
+		len += ft_putchar(n % 10 + 48);
 	}
-	else if (n >= 0 && n <= 9)
-		i += ft_putchar(n + '0');
+	if (n >= 0 && n <= 9)
+		len += ft_putchar(n + '0');
+	return (len);
 }
