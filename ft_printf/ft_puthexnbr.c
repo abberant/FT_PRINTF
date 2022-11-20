@@ -12,16 +12,24 @@
 
 #include "ft_printf.h"
 
-void	ft_puthexnbr(unsigned long n)
+int	ft_puthexnbr(unsigned long n, int upper)
 {
-	char	*c;
+	size_t	len;
+	char	c;
 
-	c = "0123456789abcdef";
-	if (n >= 16)
+	len = 0;
+	if (n < 16)
 	{
-		n = ft_puthexnbr(n / 16);
-		n = ft_puthexnbr(n % 16);
+		if (n < 10)
+			c = n + '0';
+		else
+			c = n + ('a' - (32 * upper)) - 10;
+		len += ft_putchar(c);
 	}
 	else
-		write(1, &c[n], 1);
+	{
+		len += ft_puthexnbr(n / 16, upper);
+		len += ft_puthexnbr(n % 16, upper);
+	}
+	return (len);
 }
