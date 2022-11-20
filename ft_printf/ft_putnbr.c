@@ -14,20 +14,24 @@
 
 int	ft_putnbr(int n)
 {
-	if (n == -2147483648)
-		write(1, "-2147483648", 11);
-	else if (n < 0)
+	size_t		len;
+	long		num;
+
+	len = 0;
+	num = n;
+	if (num == -2147483648)
+		len += ft_putstr("-2147483648");
+	else if (num < 0)
 	{
-		write(1, "-", 1);
-		ft_putnbr(n * -1);
+		len += ft_putchar('-');
+		num *= -1;
 	}
-	else if (n > 9)
+	if (num > 9)
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		len += ft_putnbr(num / 10);
+		len += ft_putchar(num % 10 + 48);
 	}
-	else
-	{
-		ft_putchar(n + '0');
-	}
+	if (num >= 0 && num <= 9)
+		len += ft_putchar(num + 48);
+	return (len);
 }
