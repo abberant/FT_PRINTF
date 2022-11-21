@@ -17,8 +17,6 @@ int	ft_layout(const char *str, va_list arg)
 	int	len;
 
 	len = 0;
-	if (*str == '%')
-		len += ft_putchar('%');
 	if (*str == 'c')
 		len += ft_putchar(va_arg(arg, int));
 	if (*str == 's')
@@ -34,5 +32,7 @@ int	ft_layout(const char *str, va_list arg)
 		len += ft_putstr("0x");
 		len += ft_puthexnbr(va_arg(arg, unsigned long), 0);
 	}
+	if (*str == '%')
+		len += ft_putchar('%');
 	return (len);
 }
